@@ -6,6 +6,7 @@ import GuildCraft.infra.mapper.PlayerMapperEntity;
 import GuildCraft.infra.persistence.PlayerEntity;
 import GuildCraft.infra.persistence.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +25,9 @@ public class PlayerGatewayRepository implements PlayerGateway {
         return PlayerMapperEntity.map(playerEntity);
     }
 
+
     @Override
+    @Cacheable(value = "players")
     public List<Player> getAllPlayers() {
         List<PlayerEntity> players = repository.findAll();
         return players.stream().map(PlayerMapperEntity::map).collect(Collectors.toList());
