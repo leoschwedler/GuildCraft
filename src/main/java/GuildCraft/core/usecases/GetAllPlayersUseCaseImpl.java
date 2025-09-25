@@ -3,16 +3,18 @@ package GuildCraft.core.usecases;
 import GuildCraft.core.entities.Player;
 import GuildCraft.core.gateway.PlayerGateway;
 
-public class CreatePlayerUseCaseImpl implements  CreatePlayerUseCase{
+import java.util.List;
+
+public class GetAllPlayersUseCaseImpl implements GetAllPlayersUseCase{
 
     private final PlayerGateway playerGateway;
 
-    public CreatePlayerUseCaseImpl(PlayerGateway playerGateway) {
+    public GetAllPlayersUseCaseImpl(PlayerGateway playerGateway) {
         this.playerGateway = playerGateway;
     }
 
     @Override
-    public Player execute(Player player) {
-        return playerGateway.createPlayer(player);
+    public List<Player> execute() {
+        return playerGateway.getAllPlayers();
     }
 }
